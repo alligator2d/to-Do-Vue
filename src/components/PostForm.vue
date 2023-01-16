@@ -24,26 +24,19 @@ export default {
 		return {
 			post: {
 				title: "",
-				body: ""
+				body: "",
 			}
 		};
 	},
 	methods: {
 		createPost() {
-			// const newPost = {
-			// 	id: Date.now(),
-			// 	title: this.title,
-			// 	body: this.body
-			// };
+			
 			this.id = Date.now();
-			// this.posts.push(newPost);
 			this.$emit('create', this.post)
 			this.post = {
 				title: "",
 				body: "",
 			}
-			this.title = "";
-			this.body = "";
 		}
 	}
 };

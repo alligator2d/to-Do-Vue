@@ -2,7 +2,6 @@
 	
 	<div class="app">
 		
-		<h1>Hello Vue3</h1>
 		<post-form
 			@create="createPost"
 		/>
@@ -36,7 +35,6 @@ export default {
 		createPost(post) {
 			console.log(post);
 			this.posts.push(post)
-			
 		}
 		
 	}
