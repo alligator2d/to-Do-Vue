@@ -25,11 +25,6 @@ import MyButton from "./components/UI/MyButton.vue";
 import MyDialog from "./components/UI/MyDialog.vue";
 
 export default {
-	components: {
-		MyButton,
-		MyDialog,
-		PostList, PostForm, PostItem
-	},
 	data() {
 		return {
 			posts: [
@@ -39,13 +34,14 @@ export default {
 				{ id: 4, title: "Java", body: "Описание поста 4" }
 			],
 			dialogVisible: false,
-			
 		};
 	},
 	methods: {
 		createPost(post) {
 			console.log(post);
 			this.posts.push(post);
+			this.dialogVisible = false;
+			
 		},
 		removePost(post) {
 			this.posts = this.posts.filter(p => p.id !== post.id);
@@ -53,12 +49,14 @@ export default {
 		showDialog() {
 			this.dialogVisible = true;
 		},
-		
-		
-	}
+	},
+	components: {
+		MyButton,
+		MyDialog,
+		PostList, PostForm, PostItem
+	},
 };
 </script>
-
 
 <style>
 * {
@@ -66,7 +64,6 @@ export default {
 	padding: 0;
 	box-sizing: border-box;
 }
-
 .app {
 	padding: 20px;
 }
