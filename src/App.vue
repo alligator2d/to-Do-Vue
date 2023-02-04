@@ -1,9 +1,17 @@
 <template>
 	
 	<div class="app">
+		<header>
 		<h1>Posts page</h1>
-		<my-button @click="showDialog">Create Post</my-button>
-		<my-dialog v-model:show="dialogVisible">
+		</header>
+		<my-button 
+			style="margin: 10px"
+			@click="fetchUsers">Get Posts</my-button>
+		<my-button
+			style="margin: 10px 0"
+			@click="showDialog">Create Post</my-button>
+		
+		<my-dialog v-model:show="dialogVisible"> 
 			<post-form
 				@create="createPost"
 			/>
@@ -18,6 +26,7 @@
 </template>
 
 <script>
+import axios from "axios";
 import PostList from "./components/PostList.vue";
 import PostForm from "./components/PostForm.vue";
 import PostItem from "./components/PostItem.vue";
@@ -38,7 +47,6 @@ export default {
 	},
 	methods: {
 		createPost(post) {
-			console.log(post);
 			this.posts.push(post);
 			this.dialogVisible = false;
 			
@@ -49,6 +57,15 @@ export default {
 		showDialog() {
 			this.dialogVisible = true;
 		},
+		async fetchUsers() {
+			try {
+				const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
+				this.posts = await res.data
+				console.log(this.posts);
+			} catch(e) {
+				console.log('error');
+			}
+		}
 	},
 	components: {
 		MyButton,
@@ -60,11 +77,19 @@ export default {
 
 <style>
 * {
+	font-family: 'Montserrat', sans-serif;
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	background-color: #dddee1;
 }
 .app {
 	padding: 20px;
+}
+header {
+	height: 70px;
+	margin: 10px 0 50px;
+	text-align: center;
+	/*background-color: #4CAF50;*/
 }
 </style>

@@ -28,6 +28,7 @@ export default {
 .post {
 	padding: 15px;
 	border: 2px solid teal;
+	border-radius: 10px;
 	margin-top: 10px;
 	display: flex;
 	align-items: center;

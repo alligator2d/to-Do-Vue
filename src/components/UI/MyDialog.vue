@@ -4,7 +4,7 @@
 		<slot></slot>
 	</div>
 	</div>
-</template>
+</template> 
 
 <script>
 export default {
