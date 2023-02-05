@@ -2,27 +2,29 @@
 	
 	<div class="app">
 		<header>
-		<h1>Posts page</h1>
+			<h1>Posts page</h1>
 		</header>
-		<my-button 
-			style="margin: 10px"
-			@click="fetchUsers">Get Posts</my-button>
-		<my-button
-			style="margin: 10px 0"
-			@click="showDialog">Create Post</my-button>
 		
-		<my-dialog v-model:show="dialogVisible"> 
-			<post-form
-				@create="createPost"
-			/>
+		<my-button style="margin: 10px"
+				   @click="fetchUsers">
+			Get Posts
+		</my-button>
+		
+		<my-button style="margin: 10px 0"
+				   @click="showDialog">
+			Create Post
+		</my-button>
+		
+		<my-dialog :show="dialogVisible"
+				   @hide="dialogVisible=$event">
+			<post-form @create="createPost"></post-form>
 		</my-dialog>
 		
-		<post-list
-			:posts="posts"
-			@remove="removePost"
-		/>
+		<post-list :posts="posts"
+				   @remove="removePost">
+		</post-list>
 	</div>
-	
+
 </template>
 
 <script>
@@ -42,7 +44,7 @@ export default {
 				{ id: 3, title: "Ruby", body: "Описание поста 3" },
 				{ id: 4, title: "Java", body: "Описание поста 4" }
 			],
-			dialogVisible: false,
+			dialogVisible: false
 		};
 	},
 	methods: {
@@ -59,19 +61,22 @@ export default {
 		},
 		async fetchUsers() {
 			try {
-				const res = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10')
-				this.posts = await res.data
+				const res = await axios.get("https://jsonplaceholder.typicode.com/posts?_limit=10");
+				this.posts = await res.data;
 				console.log(this.posts);
-			} catch(e) {
-				console.log('error');
+			} catch (e) {
+				console.log("error");
 			}
 		}
+		// changeDialogVisible(value) {
+		// 	this.dialogVisible = value;
+		// }
 	},
 	components: {
 		MyButton,
 		MyDialog,
 		PostList, PostForm, PostItem
-	},
+	}
 };
 </script>
 
@@ -83,9 +88,11 @@ export default {
 	box-sizing: border-box;
 	background-color: #dddee1;
 }
+
 .app {
 	padding: 20px;
 }
+
 header {
 	height: 70px;
 	margin: 10px 0 50px;
